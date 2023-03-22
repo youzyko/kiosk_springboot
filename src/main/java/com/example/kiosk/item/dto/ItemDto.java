@@ -1,6 +1,7 @@
 package com.example.kiosk.item.dto;
 
 import com.example.kiosk.item.entity.Item;
+import com.example.kiosk.option.entity.Option;
 import lombok.*;
 
 @Setter
@@ -23,10 +24,11 @@ public class ItemDto {  //userId제외한 나머지
         this.itemPrice=item.getItemPrice();
         this.countNum=item.getCountNum();
         this.status=item.isStatus();
-        this.itemDetail=item.getItemImg();
+        this.itemDetail=item.getItemDetail();
         this.itemImg=item.getItemImg();
 
     }
+
 
 
 } //class end

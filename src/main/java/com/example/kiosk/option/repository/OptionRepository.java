@@ -9,6 +9,5 @@ import java.util.List;
 public interface OptionRepository {
     List<Option> coffeeOption(int menuId);
 
-
     List<Option> nonCoffeeOption(int menuId);
 }//class_end

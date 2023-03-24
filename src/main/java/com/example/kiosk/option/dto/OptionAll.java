@@ -15,7 +15,7 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 public class OptionAll {
- /*   private List<CoffeeDto> coffeeOptions;  //커피
+   private List<CoffeeDto> coffeeOptions;  //커피
 
     public OptionAll(List<Option> optionList){
         this.convertListCoffee(optionList);
@@ -27,6 +27,6 @@ public class OptionAll {
             dtos.add(new CoffeeDto(option));
         }
         this.coffeeOptions=dtos;
-    }*/
+    }
 
 }//class_end

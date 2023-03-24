@@ -19,7 +19,9 @@ public class NonCoffeeDto {
     private String topping; //토핑
     private int toppingPrice; //토핑가격
 
-/*    public  NonCoffeeDto(Option option){
+
+
+  public  NonCoffeeDto(Option option){
         this.menuName=option.getMenuName();
         this.menuId=option.getMenuId();
         this.countNum=option.getCountNum();
@@ -29,7 +31,7 @@ public class NonCoffeeDto {
         this.sweetness=option.getSweetness();
         this.topping=option.getTopping();
         this.toppingPrice=option.getToppingPrice();
-    }*/
+    }
 
 
 }

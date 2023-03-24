@@ -16,7 +16,7 @@ public class OptionController {
     private  final OptionService optionService;
     @GetMapping(value = "/{menuId}") //메뉴를 클릭하면 옵션이 쭉 뜸
     public ResponseEntity<?> OptionAll(@PathVariable int menuId){
-        log.info("=============OptionAll_controller{}",menuId);
+        log.info("=============OptionAll_controller{}=============",menuId);
         if(menuId==5){
             return ResponseEntity.ok().body(optionService.optionCoffeeServ(menuId));
         }

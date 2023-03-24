@@ -1,6 +1,5 @@
 package com.example.kiosk.option.service;
 
-import com.example.kiosk.option.dto.CoffeeDto;
 import com.example.kiosk.option.dto.NonCoffeeDto;
 import com.example.kiosk.option.dto.OptionAll;
 import com.example.kiosk.option.dto.OptionAllNon;
@@ -15,20 +14,20 @@ import org.springframework.stereotype.Service;
 public class OptionService {
     private final OptionRepository optionRepository;
 
-    public CoffeeDto optionCoffeeServ(int menuId){
-        log.info("=============optionServ_Service");
-      if(menuId==5){
-          return new CoffeeDto();
+    public OptionAll optionCoffeeServ(int menuId){
+        log.info("=============optionServ_Service_coffee");
+      if(menuId==4){
+          return new OptionAll(optionRepository.coffeeOption(menuId)) ;
       }
-        return (CoffeeDto) optionRepository.coffeeOption(menuId);
+        return null;
     }
 
-    public NonCoffeeDto optionNonCoffeeServ(int menuId){
+    public OptionAllNon optionNonCoffeeServ(int menuId){
         log.info("=============optionNonCoffeeServ_Service");
-        if(menuId>=1 || menuId<5){
-            return new NonCoffeeDto();
+        if(menuId>=0 || menuId<4){
+            return new OptionAllNon(optionRepository.nonCoffeeOption(menuId)) ;
         }
-        return (NonCoffeeDto) optionRepository.nonCoffeeOption(menuId);
+        return null;
     }
 
 

@@ -17,7 +17,7 @@ public class CoffeeDto {
     private int coffeeTopping; // 샷추가
     private int shotPrice; // 샷추가 가격
 
-/*    public  CoffeeDto(Option option){
+    public  CoffeeDto(Option option){
         this.menuName=option.getMenuName();
         this.menuId=option.getMenuId();
         this.countNum=option.getCountNum();
@@ -25,6 +25,7 @@ public class CoffeeDto {
         this.hotCold=option.getHotCold();
         this.coffeeTopping=option.getCoffeeTopping();
         this.shotPrice=option.getShotPrice();
-    }*/
+    }
+
 
 }//class end

@@ -15,17 +15,17 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 public class OptionAll {
-   private List<CoffeeDto> coffeeOptions;  //커피
+  private CoffeeDto coffeeOptions;  //커피
 
-    public OptionAll(List<Option> optionList){
+    public OptionAll(Option optionList){
         this.convertListCoffee(optionList);
     }
 
-    public void convertListCoffee(List<Option> options){
-        List<CoffeeDto> dtos=new ArrayList<>();
-        for (Option option:options){
+    public void convertListCoffee(Option options){
+        CoffeeDto dtos=new CoffeeDto(options);
+      /*  for (Option option:options){
             dtos.add(new CoffeeDto(option));
-        }
+        }*/
         this.coffeeOptions=dtos;
     }
 

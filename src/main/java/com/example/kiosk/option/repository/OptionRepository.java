@@ -7,7 +7,7 @@ import java.util.List;
 
 @Mapper
 public interface OptionRepository {
-    List<Option> coffeeOption(int menuId);
+    Option coffeeOption(int menuId);
 
-    List<Option> nonCoffeeOption(int menuId);
+    Option nonCoffeeOption(int menuId);
 }//class_end

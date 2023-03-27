@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 public class OptionController {
     private  final OptionService optionService;
     @GetMapping(value = "/{menuId}") //메뉴를 클릭하면 옵션이 쭉 뜸
-    public ResponseEntity<?> OptionAll(@PathVariable int menuId){
+    public ResponseEntity<?> OptionAll(@PathVariable (value="menuId",required=false) int menuId){
         log.info("=============OptionAll_controller{}=============",menuId);
         if(menuId==4){
             return ResponseEntity.ok().body(optionService.optionCoffeeServ(menuId));

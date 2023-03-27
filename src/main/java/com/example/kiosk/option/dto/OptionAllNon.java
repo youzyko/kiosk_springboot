@@ -6,24 +6,22 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.util.ArrayList;
-import java.util.List;
 @Setter
 @Getter
 @ToString
 @NoArgsConstructor
 public class OptionAllNon {
-  private List<NonCoffeeDto> noncoffeeOptions;  //커피
+  private NonCoffeeDto noncoffeeOptions;  //커피
 
-    public OptionAllNon(List<Option> optionList){
+    public OptionAllNon(Option optionList){
         this.convertListCoffee(optionList);
     }
 
-    public void convertListCoffee(List<Option> options){
-        List<NonCoffeeDto> dtos=new ArrayList<>();
-        for (Option option:options){
+    public void convertListCoffee(Option options){
+       NonCoffeeDto dtos=new NonCoffeeDto(options);
+       /* for (Option option:options){
             dtos.add(new NonCoffeeDto(option));
-        }
+        }*/
         this.noncoffeeOptions=dtos;
     }
 }//class_end

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kiosk.topping.repository.TopppingRepository">
+    <select id="coffeeToppingOption" resultType="com.example.kiosk.topping.entity.Toppping">
+        SELECT
+            toppingNameCoffee,toppingPriceCoffee
+        FROM
+            coffeetopping
+        WHERE menuId=#{menuId}
+    </select>
+
+    <select id="nonCoffeeToppingOption" resultType="com.example.kiosk.topping.entity.Toppping">
+        SELECT
+            toppingNameNonCoffee,toppingPriceNonCoffee
+        FROM
+            noncoffeetopping
+
+    </select>
+
+
+
+
+
+</mapper>

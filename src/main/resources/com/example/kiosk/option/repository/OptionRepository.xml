@@ -5,20 +5,18 @@
 <mapper namespace="com.example.kiosk.option.repository.OptionRepository">
     <select id="coffeeOption" resultType="com.example.kiosk.option.entity.Option">
         SELECT
-            menuName,menuId,hereTogo,hotCold, iceAmount,coffeeTopping,shotPrice
+            menuName,menuId,hereTogo,hotCold, iceAmount
         FROM
             option
         WHERE menuId=#{menuId}
     </select>
     <select id="nonCoffeeOption" resultType="com.example.kiosk.option.entity.Option">
         SELECT
-            menuName,menuId,hereTogo,hotCold, iceAmount,sweetness,topping,toppingPrice
+            menuName,menuId,hereTogo,hotCold, iceAmount
         FROM
             option
         WHERE menuId=#{menuId}
+
     </select>
-
-
-
 
 </mapper>

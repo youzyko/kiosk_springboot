@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kiosk.user.repository.UserRepository">
+    <select id="findUserById" resultType="com.example.kiosk.user.entity.User">
+        SELECT id, pwd
+        FROM user
+        WHERE id=#{id}
+    </select>
+
+    <insert id="register">
+        INSERT INTO user
+            (id, pwd)
+        VALUES
+            (#{id}, #{pwd})
+    </insert>
+
+   <!-- <select id="existsByEmail" resultType="boolean">
+        SELECT COUNT(*)
+        FROM user
+        WHERE email=#{email}
+    </select>
+
+    <select id="findProfile" resultType="String">
+        SELECT profileImg
+        FROM user
+        WHERE id = #{userId}
+    </select>-->
+
+</mapper>

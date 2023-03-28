@@ -8,15 +8,13 @@ import lombok.*;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class TopppingCoffeDto {
+public class CoffeeToppingDto {
     private String toppingNameCoffee; //토핑이름
 
-    private int toppingPriceCoffee; //토핑 가격
+    private  int toppingPriceCoffee; //토핑 가격
 
-    public TopppingCoffeDto(Toppping toppping){
+    public CoffeeToppingDto(Toppping toppping){
         this.toppingNameCoffee=toppping.getToppingNameCoffee();
         this.toppingPriceCoffee=toppping.getToppingPriceCoffee();
-
-
     }
-}//class end
+}

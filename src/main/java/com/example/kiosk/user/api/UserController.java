@@ -2,6 +2,9 @@ package com.example.kiosk.user.api;
 
 
 
+import com.example.kiosk.error.ErrorDTO;
+import com.example.kiosk.security.TokenProvider;
+import com.example.kiosk.user.dto.UserRequest;
 import com.example.kiosk.user.dto.UserResponse;
 import com.example.kiosk.user.entity.User;
 import com.example.kiosk.user.service.UserService;
@@ -13,31 +16,55 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+
 import java.io.IOException;
 import java.util.UUID;
 
 @RestController
 @Slf4j
-@RequestMapping("/api/login")
+@RequestMapping("/api/auth")
 @RequiredArgsConstructor
 @CrossOrigin
 
 public class UserController {
     private final UserService userService;
+    private final TokenProvider tokenProvider;
 
-    @PostMapping("/signup")  //회원가입
-    public ResponseEntity<?> register(
-            @RequestBody User user)
-            throws IOException {
+     //회원가입
+     @PostMapping("/signup")
+     public ResponseEntity<?> register(
+             @RequestPart("userInfo") User user)
+             throws IOException{
+         try {
+             User user1 = userService.createServ(user);
+             return  ResponseEntity.ok().body(new UserResponse(user1));
+         }
+         catch (RuntimeException e){
+             return ResponseEntity.badRequest().body(e.getMessage());
+
+         }
+     }
+    //로그인
+   @PostMapping("/signin")
+    public ResponseEntity<?> signin(@RequestBody UserRequest dto) {
+        log.info("/auth/signin POST!! - login info : {}", dto);
+
         try {
-            User user1 = userService.createServ(user);
-            return  ResponseEntity.ok().body(new UserResponse(user1));
-        }
-        catch (RuntimeException e){
-            return ResponseEntity.badRequest().body(e.getMessage());
+            User user
+                    = userService.validateLogin(dto.getId(), dto.getPwd());
 
+            // 토큰 생성
+            final String token = tokenProvider.create(user);
+                log.info("==========token:{}",token);
+            UserResponse responseDTO = new UserResponse(user);
+            responseDTO.setToken(token); // 발행한 토큰을 응답정보에 포함
+
+            return ResponseEntity.ok().body(responseDTO);
+
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new ErrorDTO(e.getMessage()));
         }
-    } //signup_end
+    } //signin_end
 
 
 

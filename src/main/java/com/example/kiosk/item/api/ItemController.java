@@ -33,10 +33,6 @@ public class ItemController {
             return ResponseEntity.ok().body(itemService.menuTeaServ(itemId));
     } // getmapping_end
 
-    @GetMapping
-    public String Hello(){
-        return "GONG CHA에 오신것을 환영합니다. 메뉴를 선택해주세요";
-    }
 
 
 

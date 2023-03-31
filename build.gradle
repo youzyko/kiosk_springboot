@@ -40,7 +40,7 @@ dependencies {
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 
 	//검증 @Valid
-	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.5.2'
+	//mplementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.5.2'
 }
 
 tasks.named('test') {

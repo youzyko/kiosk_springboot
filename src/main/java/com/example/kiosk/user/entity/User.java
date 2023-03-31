@@ -17,5 +17,14 @@ public class User {
         this.id= UUID.randomUUID().toString(); //중복 방지
     }
 
+    public  User(UserRequest dto){
+        this();
+        this.id=dto.getId();
+        this.pwd=dto.getPwd();
+    }
 
+    public User(User user) {
+        this.id=user.getId();
+        this.pwd=user.getPwd();
+    }
 }//class_end

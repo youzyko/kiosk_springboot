@@ -1,0 +1,7 @@
+itemId,itemName,itemPrice,countNum,status,itemDetail,itemImg
+0,노랑밀크티,4500,1,1,"완전 맛있음",NULL
+1,브라운슈가,3500,1,1,완전굿,NULL
+0,블랙밀크티,4000,1,1,맛있습니다,NULL
+3,스무디라테,5000,1,1,스무라테완맛,NULL
+2,차이티라테,4500,1,1,"차이티라테 맛있음",NULL
+4,커피,3000,1,1,연한커피,NULL

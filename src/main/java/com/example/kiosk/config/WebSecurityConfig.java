@@ -39,8 +39,8 @@ public class WebSecurityConfig {
                 .and()
                 // /경로와 /auth로 시작하는 경로는 인증안해도됨
                 .authorizeRequests()
-                .antMatchers("/", "/api/auth/**").permitAll()
-                .antMatchers("/", "/api/image/**").permitAll()
+                .antMatchers("/", "/api/auth/**", "/api/image/**").permitAll()
+
                 // 그 외의 경로는 모두 인증을 거쳐야 함
                 .anyRequest().authenticated();
 

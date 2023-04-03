@@ -2,13 +2,12 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.kiosk.backgroundImg.repository.ImageDataRepository">
 
-    <insert id="uploadImgRepo">
+<mapper namespace="com.example.kiosk.mainImage.repository.MainImgRepository">
+    <insert id="save">
         INSERT INTO imagedata
-            ( name, type)
+            (id, mainImg)
         VALUES
-            ( #{name}, #{type})
+            (#{id}, #{mainImg})
     </insert>
-
 </mapper>

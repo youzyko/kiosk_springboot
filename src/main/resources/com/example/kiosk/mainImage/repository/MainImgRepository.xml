@@ -10,4 +10,11 @@
         VALUES
             (#{id}, #{mainImg})
     </insert>
+
+    <select id="findBackImg" resultType="String">
+        SELECT mainImg
+        FROM imagedata
+
+    </select>
+
 </mapper>

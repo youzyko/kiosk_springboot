@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
@@ -70,56 +71,39 @@ public class MainImgController {
     @GetMapping  //이미지 나열
     public ResponseEntity<?> loadImg() throws  IOException {
 
-        List<MainImg> backImgPath = mainImgService.getProfilePath();
+        List<String> backImgPath = mainImgService.getProfilePath();
         log.info("backImgPath=={}", backImgPath);
-        ///backImgPath==[\2023\04\03\95c60820-4a1f-4111-96a9-7798ac863583_images (1).jpg,
-        // \2023\04\06\a3e27c4b-050f-4509-8266-3adf76c8fd4d_images (1).jpg]
 
-        //rawImageData를 한번에 받을 수 있는 공간이 필요함
-
-        List<byte[]> container=new ArrayList<>();
-        Iterator<MainImg> iterator = backImgPath.iterator();
+        List<byte[]> rawImageDatas =new ArrayList<>();
+        Iterator<String> iterator = backImgPath.iterator();
         while (iterator.hasNext()) {
             String element = String.valueOf(iterator.next());
             log.info("element=={}", element);
-            // element==\2023\04\03\95c60820-4a1f-4111-96a9-7798ac863583_images (1).jpg
-            //element==\2023\04\07\dc0e5ae9-aabe-4f30-90dc-aab896f755f6_images (1).jpg
 
             String fullPath = uploadRootPath + File.separator + element;
             log.info("fullPath=={}", fullPath);
-            //C:/profile_upload\\2023\04\03\95c60820-4a1f-4111-96a9-7798ac863583_images (1).jpg
-            //C:/profile_upload\\2023\04\07\dc0e5ae9-aabe-4f30-90dc-aab896f755f6_images (1).jpg
 
             File targetFile = new File(fullPath);
             log.info("targetFile=={}", targetFile);
-            //targetFile==C:\profile_upload\2023\04\03\95c60820-4a1f-4111-96a9-7798ac863583_images (1).jpg
-            //targetFile==C:\profile_upload\2023\04\07\dc0e5ae9-aabe-4f30-90dc-aab896f755f6_images (1).jpg
 
             byte[] rawImageData= FileCopyUtils.copyToByteArray(targetFile);
-            log.info("rawImageData=={}", rawImageData);
-            //rawImageData==[-1, -40, -1, -32, 0, 16, 74, 70, 73, 70, 0, 1, 1, 0, 0, 1, 0, ~]
-            //rawImageData==[-1, -40, -1, -32, 0, 16, 74, 70, 73, 70, 0, 1, 1, 0, 0, 1, 0, ~]
+//            log.info("rawImageData=={}", rawImageData);
 
-            //return ResponseEntity.ok().body(rawImageData); //rawImageData[0] 조차 못 받아옴
-
-            container.add(rawImageData);
+            rawImageDatas.add(rawImageData);
 
 
         } //while_end
 
-        log.info("container=={}", container);
-        // container==[[-1, -40,3 0~].[-1, -40,3 0~]]
+        log.info("backImgPath.get(0).getMainImg()=={}", backImgPath.get(0));
 
-
-
-      //  log.info("rawImageData=={}", rawImageData); //마지막 값만 출력
 
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(FileUploadUtil.getMediaType(backImgPath.toString()));
+        headers.setContentType(FileUploadUtil.getMediaType(backImgPath.get(0)));
+        //headers.setContentType(MediaType.IMAGE_JPEG);
 
-        return //null;
-                ResponseEntity.ok().headers(headers).body(container.get(0));
+        return ResponseEntity.ok().headers(headers).body(rawImageDatas.get(0));
     }
+
 
 
 }//class_end

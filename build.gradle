@@ -39,6 +39,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 
+	implementation 'commons-io:commons-io:2.6'
 	//검증 @Valid
 	//mplementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.5.2'
 }

@@ -9,6 +9,6 @@ import java.util.List;
 public interface MainImgRepository {
     boolean save(MainImg mainImg); // 이미지 등록
 
-   /* List<MainImg> findALll();*/
-   List<MainImg> findBackImg();
+ List<String> findBackImg();
+  /* String findBackImg();*/
 }

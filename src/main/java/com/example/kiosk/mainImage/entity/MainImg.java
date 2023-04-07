@@ -26,4 +26,6 @@ public class MainImg {
         this.mainImg=mainImg.getMainImg();
     }
 
+
+
 }//class_end

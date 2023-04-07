@@ -1,6 +1,5 @@
 package com.example.kiosk.mainImage.api;
 
-import com.example.kiosk.mainImage.dto.ImgAll;
 import com.example.kiosk.mainImage.entity.MainImg;
 import com.example.kiosk.mainImage.service.MainImgService;
 import com.example.kiosk.util.FileUploadUtil;
@@ -13,9 +12,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.Array;
+import java.io.*;
 import java.util.*;
 
 @RestController
@@ -70,83 +67,59 @@ public class MainImgController {
         return ResponseEntity.ok().body(f);
     }
 
-    @GetMapping
-    public ResponseEntity<?> loadImg() throws  IOException{
+    @GetMapping  //이미지 나열
+    public ResponseEntity<?> loadImg() throws  IOException {
+
         List<MainImg> backImgPath = mainImgService.getProfilePath();
-        log.info("backImgPath=={}",backImgPath);
-        //backImgPath==[\2023\04\03\95c60820-4a1f-4111-96a9-7798ac863583_images (1).jpg, \2023\04\06\a3e27c4b-050f-4509-8266-3adf76c8fd4d_images (1).jpg]
+        log.info("backImgPath=={}", backImgPath);
+        ///backImgPath==[\2023\04\03\95c60820-4a1f-4111-96a9-7798ac863583_images (1).jpg,
+        // \2023\04\06\a3e27c4b-050f-4509-8266-3adf76c8fd4d_images (1).jpg]
 
-        Iterator<MainImg> iterator=backImgPath.iterator();
+        //rawImageData를 한번에 받을 수 있는 공간이 필요함
 
-        List<String> raw=new ArrayList<>();
-        byte[] rawImageData=null;
-        while (iterator.hasNext()){
-            int i=0;
+        List<byte[]> container=new ArrayList<>();
+        Iterator<MainImg> iterator = backImgPath.iterator();
+        while (iterator.hasNext()) {
             String element = String.valueOf(iterator.next());
-            log.info("element===={}",element);
+            log.info("element=={}", element);
+            // element==\2023\04\03\95c60820-4a1f-4111-96a9-7798ac863583_images (1).jpg
+            //element==\2023\04\07\dc0e5ae9-aabe-4f30-90dc-aab896f755f6_images (1).jpg
 
             String fullPath = uploadRootPath + File.separator + element;
-            //raw.add(fullPath);
-            log.info("fullPath===={}",fullPath);
+            log.info("fullPath=={}", fullPath);
+            //C:/profile_upload\\2023\04\03\95c60820-4a1f-4111-96a9-7798ac863583_images (1).jpg
+            //C:/profile_upload\\2023\04\07\dc0e5ae9-aabe-4f30-90dc-aab896f755f6_images (1).jpg
 
-            File targetFile=new File(fullPath);
-            log.info("targetFile=={}",targetFile);
-            rawImageData = FileCopyUtils.copyToByteArray(targetFile);
-           log.info(Arrays.toString(rawImageData));
-        }
+            File targetFile = new File(fullPath);
+            log.info("targetFile=={}", targetFile);
+            //targetFile==C:\profile_upload\2023\04\03\95c60820-4a1f-4111-96a9-7798ac863583_images (1).jpg
+            //targetFile==C:\profile_upload\2023\04\07\dc0e5ae9-aabe-4f30-90dc-aab896f755f6_images (1).jpg
+
+            byte[] rawImageData= FileCopyUtils.copyToByteArray(targetFile);
+            log.info("rawImageData=={}", rawImageData);
+            //rawImageData==[-1, -40, -1, -32, 0, 16, 74, 70, 73, 70, 0, 1, 1, 0, 0, 1, 0, ~]
+            //rawImageData==[-1, -40, -1, -32, 0, 16, 74, 70, 73, 70, 0, 1, 1, 0, 0, 1, 0, ~]
+
+            //return ResponseEntity.ok().body(rawImageData); //rawImageData[0] 조차 못 받아옴
+
+            container.add(rawImageData);
+
+
+        } //while_end
+
+        log.info("container=={}", container);
+        // container==[[-1, -40,3 0~].[-1, -40,3 0~]]
+
+
+
+      //  log.info("rawImageData=={}", rawImageData); //마지막 값만 출력
+
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(FileUploadUtil.getMediaType(backImgPath.toString()));
-        return ResponseEntity
-                .ok()
-                .headers(headers)
-                .body(rawImageData);
 
-       // log.info("targetFile=={}",targetFile);
-      /*  if(!targetFile.exists()) return  ResponseEntity.notFound().build();
-        byte[] rawImageData = FileCopyUtils.copyToByteArray(targetFile);
-
-        return ResponseEntity
-                .ok()
-
-                .body(rawImageData);*/
-        // ex) E:/upload/2023/~~
-     // String fullPath = uploadRootPath + File.separator + backImgPath;
-      //log.info("fullPath=={}",fullPath);
-        //C:/profile_upload\\2023\04\03\95c60820-4a1f-4111-96a9-7798ac863583_images (1).jpg
-        //fullPath==C:/profile_upload\[\2023\04\03\95c60820-4a1f-4111-96a9-7798ac863583_images (1).jpg, \2023\04\06\a3e27c4b-050f-4509-8266-3adf76c8fd4d_images (1).jpg]
-        //fullPath==[C:/profile_upload[\2023\04\03\95c60820-4a1f-4111-96a9-7798ac863583_images (1).jpg, \2023\04\06\a3e27c4b-050f-4509-8266-3adf76c8fd4d_images (1).jpg]]
-
-
-        // 해당 경로를 파일 객체로 포장
-       // File targetFile = new File(fullPath);
-        //log.info("targetFile=={}",targetFile);
-        //C:\profile_upload\2023\04\03\95c60820-4a1f-4111-96a9-7798ac863583_images (1).jpg
-        //targetFile==C:\profile_upload\[\2023\04\03\95c60820-4a1f-4111-96a9-7798ac863583_images (1).jpg, \2023\04\06\a3e27c4b-050f-4509-8266-3adf76c8fd4d_images (1).jpg]
-
-
-        //해당 파일 존재x
-      //  if(!targetFile.exists()) return  ResponseEntity.notFound().build();
-
-        // 파일 데이터를 바이트배열로 포장 (blob 데이터)...대상 파일을 복사하여 Byte 배열로 반환해주는 클래스
-      //  byte[] rawImageData = FileCopyUtils.copyToByteArray(targetFile);
-
-        // 응답 헤더 정보 추가
-       // HttpHeaders headers = new HttpHeaders();
-       // headers.setContentType(FileUploadUtil.getMediaType(backImgPath.toString()));
-
-        // 클라이언트에 순수 이미지파일 데이터 리턴
-       // return ResponseEntity
-          //      .ok()
-         //       .headers(headers)
-           //     .body(rawImageData);
-
-      /*  ImgAll profilePath = mainImgService.getProfilePath();
-        log.info("{}",profilePath);
-        return  ResponseEntity.ok().body(profilePath);*/
-
+        return //null;
+                ResponseEntity.ok().headers(headers).body(container.get(0));
     }
-
-
 
 
 }//class_end

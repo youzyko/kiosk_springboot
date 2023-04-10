@@ -14,7 +14,13 @@
     <select id="findBackImg" resultType="String">
         SELECT mainImg
         FROM imagedata
+        where id=#{id}
+    </select>
 
+    <select id="findAllId" resultType="String">
+        SELECT id
+        FROM imagedata
     </select>
 
 </mapper>
+<!--       com.example.kiosk.mainImage.entity.MainImg-->

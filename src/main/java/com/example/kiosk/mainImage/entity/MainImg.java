@@ -17,13 +17,16 @@ public class MainImg {
     private String id;
     private String mainImg;
 
-    public MainImg() {
+
+
+   public MainImg() {
         this.id = UUID.randomUUID().toString();
     }
 
     public MainImg(MainImg mainImg) {
         this.id=mainImg.getId();
         this.mainImg=mainImg.getMainImg();
+
     }
 
 

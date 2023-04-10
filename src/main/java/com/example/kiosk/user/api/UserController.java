@@ -8,16 +8,22 @@ import com.example.kiosk.user.dto.UserRequest;
 import com.example.kiosk.user.dto.UserResponse;
 import com.example.kiosk.user.entity.User;
 import com.example.kiosk.user.service.UserService;
+import com.example.kiosk.util.FileUploadUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -29,7 +35,8 @@ import java.util.UUID;
 public class UserController {
     private final UserService userService;
     private final TokenProvider tokenProvider;
-
+    @Value("${upload.path}")
+    private String uploadRootPath;
      //회원가입
      @PostMapping("/signup")
      public ResponseEntity<?> register(

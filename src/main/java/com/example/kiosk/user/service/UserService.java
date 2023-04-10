@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 
 
 @Service
@@ -58,6 +59,8 @@ public class UserService {
 
         return user; // 로그인 성공시 회원정보 리턴
     }
+
+
 
 
 

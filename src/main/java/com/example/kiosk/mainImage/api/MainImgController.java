@@ -7,8 +7,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,16 +24,16 @@ import java.util.*;
 @RequiredArgsConstructor
 @CrossOrigin
 public class MainImgController {
-    private  final MainImgService mainImgService;
+    private final MainImgService mainImgService;
     @Value("${upload.path}")
     private String uploadRootPath;
 
     @PostMapping("/upload")
     public ResponseEntity<?> upload( //베경이미지 등록
-            @RequestPart(value="mainImg", required = false) MultipartFile mainImg
+                                     @RequestPart(value = "mainImg", required = false) MultipartFile mainImg
     ) throws IOException {
-        MainImg mainImg1=new MainImg();
-        log.info("mainIMG1================================{}",mainImg1);
+        MainImg mainImg1 = new MainImg();
+        log.info("mainIMG1================================{}", mainImg1);
         if (mainImg != null) {
             log.info("profileImg : {}", mainImg.getOriginalFilename());
 
@@ -68,42 +70,52 @@ public class MainImgController {
         return ResponseEntity.ok().body(f);
     }
 
-    @GetMapping  //이미지 나열
-    public ResponseEntity<?> loadImg() throws  IOException {
+     @GetMapping("/{id}")//이미지 나열
+       public ResponseEntity<?> loadImg(@PathVariable String id)throws  IOException {
 
-        List<String> backImgPath = mainImgService.getProfilePath();
-        log.info("backImgPath=={}", backImgPath);
+            // ex)  /2023/01/07/djfksjdkfsjf_파일명.확장자
+         String profilePath = mainImgService.getProfilePath(id);
 
-        List<byte[]> rawImageDatas =new ArrayList<>();
-        Iterator<String> iterator = backImgPath.iterator();
-        while (iterator.hasNext()) {
-            String element = String.valueOf(iterator.next());
-            log.info("element=={}", element);
+         log.info("profilePath=={}",profilePath);
 
-            String fullPath = uploadRootPath + File.separator + element;
-            log.info("fullPath=={}", fullPath);
+         // ex) E:/upload/2023/~~
+         String fullPath = uploadRootPath + File.separator + profilePath;
+         log.info("fullPath=={}",fullPath);
 
-            File targetFile = new File(fullPath);
-            log.info("targetFile=={}", targetFile);
+         // 해당 경로를 파일 객체로 포장
+         File targetFile = new File(fullPath);
+         log.info("targetFile=={}",targetFile);
 
-            byte[] rawImageData= FileCopyUtils.copyToByteArray(targetFile);
-//            log.info("rawImageData=={}", rawImageData);
+         //해당 파일 존재x
+         if(!targetFile.exists()) return  ResponseEntity.notFound().build();
 
-            rawImageDatas.add(rawImageData);
+         // 파일 데이터를 바이트배열로 포장 (blob 데이터)...대상 파일을 복사하여 Byte 배열로 반환해주는 클래스
+         byte[] rawImageData = FileCopyUtils.copyToByteArray(targetFile);
+         log.info("rawImageData=={}",rawImageData);
+         // 응답 헤더 정보 추가
+         HttpHeaders headers = new HttpHeaders();
+         headers.setContentType(FileUploadUtil.getMediaType(profilePath));
 
+         // 클라이언트에 순수 이미지파일 데이터 리턴
+         return ResponseEntity
+                 .ok()
+                 .headers(headers)
+                 .body(rawImageData);
+       }
 
-        } //while_end
-
-        log.info("backImgPath.get(0).getMainImg()=={}", backImgPath.get(0));
-
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(FileUploadUtil.getMediaType(backImgPath.get(0)));
-        //headers.setContentType(MediaType.IMAGE_JPEG);
-
-        return ResponseEntity.ok().headers(headers).body(rawImageDatas.get(0));
+       //id 하나씩 가져오기
+    @GetMapping("/bringId")
+    public  ResponseEntity<?> listAllId(){
+        log.info("아이디 전체 불러오기");
+        return  ResponseEntity.ok().body(mainImgService.findAllId());
     }
 
 
+}//calss_end
 
-}//class_end
+
+
+
+
+
+

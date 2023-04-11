@@ -13,4 +13,6 @@ public interface MainImgRepository {
  String findBackImg(String id);
   /* String findBackImg();*/
     List<String> findAllId(); //아이디 목록
+
+
 }

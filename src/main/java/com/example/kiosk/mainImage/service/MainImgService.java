@@ -36,6 +36,8 @@ public class MainImgService {
         return mainImgRepository.findAllId();
     }
 
+
+
 /*    public ImgAll findAllServ() {
         return new ImgAll(mainImgRepository.findALll());
     }*/

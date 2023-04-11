@@ -110,7 +110,6 @@ public class MainImgController {
         return  ResponseEntity.ok().body(mainImgService.findAllId());
     }
 
-
 }//calss_end
 
 

@@ -3,14 +3,20 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.kiosk.menu.repository.MenuRepository">
+
     <select id="menuTea" resultType="com.example.kiosk.menu.entity.MenuName">
         SELECT
-            MenuName,MenuId
+            menuId,menuName
         FROM
             menuname
     </select>
 
-
+    <insert id="save">
+        INSERT INTO menuname
+            (menuName, menuId)
+        VALUES
+            (#{menuName},#{menuId})
+    </insert>
 
 
 </mapper>

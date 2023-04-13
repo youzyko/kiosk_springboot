@@ -2,10 +2,7 @@ package com.example.kiosk.menu.dto;
 
 
 import com.example.kiosk.menu.entity.MenuName;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +12,8 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 
-public class ItemFindAllDto {
 
+public class ItemFindAllDto {
     private List<MenuName> items; //userId 제외한 상품 목록
 
     public ItemFindAllDto(List<MenuName> itemList){

@@ -23,6 +23,8 @@ import java.util.List;
 @RequiredArgsConstructor
 @CrossOrigin
 
+//item... 상세메뉴 ex) 블랙밀크티,타로밀크티...
+//menu... 큰카테고리 ex) 밀크티,스무디...
 public class ItemController {
 
     private final ItemService itemService;

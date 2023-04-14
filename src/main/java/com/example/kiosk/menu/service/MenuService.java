@@ -21,15 +21,27 @@ public class MenuService {
 
 
     public ItemFindAllDto menuTeaServ() {
-        log.info("=============only menuname_Service");
+        log.info("MENUNAME_FINDALL_SERIVCE");
+
         return new ItemFindAllDto(menuRepository.menuTea());
     }
 
 
 
   public boolean createServ(MenuName menuName) {
+      log.info("MENUNAME_ADD_SERIVCE");
    return  menuRepository.save(menuName);
 
+  }
+
+  public  ItemFindAllDto deleteServ(int id){
+      log.info("MENUNAME_DELETE_SERIVCE");
+      boolean delete=menuRepository.delete(id);
+      if (!delete) {
+          log.warn("delete fail!! not found id [{}]", id);
+          throw new RuntimeException("delete fail!");
+      }
+      return  menuTeaServ();
   }
 
 

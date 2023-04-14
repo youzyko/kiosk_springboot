@@ -18,5 +18,9 @@
             (#{menuName},#{menuId})
     </insert>
 
+    <delete id="delete">
+        DELETE FROM menuname
+        WHERE menuId=#{menuId}
+    </delete>
 
 </mapper>

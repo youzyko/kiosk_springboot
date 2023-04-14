@@ -12,4 +12,6 @@ public interface MenuRepository {
     List<MenuName> menuTea();
 
   boolean save(MenuName menuName);
+
+  boolean delete(int id);
 }

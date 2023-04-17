@@ -1,6 +1,7 @@
 package com.example.kiosk.menu.entity;
 
 import lombok.*;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.List;
 

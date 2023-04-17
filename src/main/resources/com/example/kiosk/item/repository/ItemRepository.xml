@@ -5,12 +5,18 @@
 <mapper namespace="com.example.kiosk.item.repository.ItemRepository">
     <select id="menuTea" resultType="com.example.kiosk.item.entity.Item">
         SELECT
-            itemId,itemName,itemPrice,status, itemDetail,itemImg,countNum
+            itemId,itemName,itemPrice,status,itemImg,countNum
         FROM
             item
         WHERE itemId=#{itemId}
     </select>
 
+    <insert id="save">
+        INSERT INTO  item
+            (itemId,itemName,itemPrice,status,itemImg,ownImgId)
+        VALUES
+            (#{itemId}, #{itemName},#{itemPrice},#{status}, #{itemImg}, #{ownImgId})
+    </insert>
 
 
 

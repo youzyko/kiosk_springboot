@@ -41,6 +41,7 @@ public class ItemController {
             return ResponseEntity.ok().body(itemService.menuTeaServ(itemId));
     } // getmapping_end
 
+    @GetMapping(value = {"/{ownImgId}"})//전체조회
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestPart(value="itemImg",required = false)MultipartFile itemImg,
                                       @RequestPart("itemInfo")ItemDto itemDto) throws  IOException{

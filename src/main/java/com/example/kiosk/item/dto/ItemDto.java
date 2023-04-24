@@ -27,7 +27,7 @@ public class ItemDto {  //userId제외한 나머지
         this.status=item.isStatus();
         //this.itemDetail=item.getItemDetail();
        this.itemImg=item.getItemImg();
-//        this.ownImgId=item.getOwnImgId();
+        this.ownImgId=item.getOwnImgId();
 
     }
 

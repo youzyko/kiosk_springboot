@@ -23,13 +23,17 @@
             ownImgId
         FROM
             item
+        order by
+            itemId
     </select>
 
     <select id="findAllItem" resultType="com.example.kiosk.item.entity.Item">
         SELECT
-            itemId,itemName,itemPrice,status,itemImg,countNum,ownImgId
+            itemId,itemName,itemPrice,status,countNum
         FROM
             item
+order by
+            itemId
     </select>
 
  <select id="findImg" resultType="String">

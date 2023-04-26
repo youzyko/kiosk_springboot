@@ -29,7 +29,7 @@
 
     <select id="findAllItem" resultType="com.example.kiosk.item.entity.Item">
         SELECT
-            itemId,itemName,itemPrice,status,countNum
+            *
         FROM
             item
 order by
@@ -41,5 +41,10 @@ order by
         FROM item
         where ownImgId=#{ownImgId}
     </select>
+
+    <delete id="delete">
+        DELETE FROM item
+        WHERE ownImgId=#{ownImgId}
+    </delete>
 
 </mapper>

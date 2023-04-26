@@ -16,7 +16,6 @@ public class ItemFindAllDto {
     private List<ItemDto> items; //userId 제외한 상품 목록
 
     public ItemFindAllDto(List<Item> itemList){
-
         this.convertDtoList(itemList);
     }
     public void convertDtoList(List<Item> itemList){

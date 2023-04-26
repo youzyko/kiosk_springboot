@@ -4,10 +4,8 @@ import com.example.kiosk.item.dto.ItemFindAllDto;
 
 import com.example.kiosk.item.entity.Item;
 import com.example.kiosk.item.repository.ItemRepository;
-import com.example.kiosk.mainImage.entity.MainImg;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -46,5 +44,15 @@ public class ItemService {
     public List<Item> findAllItem() {
         log.info("ITEM_ALLINFORM_SERVICE");
         return itemRepository.findAllItem();
+    }
+
+    public boolean delete(String ownImgId){
+        log.info("ITEM_DELETE_SERVICE");
+        boolean f=itemRepository.delete(ownImgId);
+        if(!f){
+            log.warn("DELETE_FAIL==>{}",ownImgId);
+            throw  new RuntimeException("delete fail!");
+        }
+        return  f;
     }
 }//class_end

@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,6 +21,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.locks.ReentrantLock;
 
 @RestController
 @Slf4j
@@ -126,8 +128,17 @@ public class ItemController {
 
     } //postMapping_/register
 
-
-
+    @DeleteMapping("/ownImgId/{ownImgId}")
+    public ResponseEntity<?> delete(@PathVariable String ownImgId){
+        log.info("ITEM_DELETE_CONTROLLER");
+        try{
+            boolean itemFindAllDto=itemService.delete(ownImgId);
+            return ResponseEntity.ok().body(itemFindAllDto);
+        }
+        catch (Exception e){
+            return ResponseEntity.notFound().build();
+        }
+    }
 
 
 }//class end

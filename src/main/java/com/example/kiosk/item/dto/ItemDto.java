@@ -1,6 +1,7 @@
 package com.example.kiosk.item.dto;
 
 import com.example.kiosk.item.entity.Item;
+import com.example.kiosk.menu.entity.MenuName;
 import com.example.kiosk.option.entity.Option;
 import lombok.*;
 
@@ -10,6 +11,8 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ItemDto {  //userId제외한 나머지
+    MenuName menuName=new MenuName();
+
     private  int itemId; //상품아이디
     private String itemName; //상품 이름(PK)
     private  int itemPrice; //상품 가격

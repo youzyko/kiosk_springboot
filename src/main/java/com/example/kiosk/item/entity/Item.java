@@ -22,12 +22,13 @@ public class Item {
     private String itemImg; //상품이미지
     //private  String userId; //상품 등록한 자(admin)
     private String ownImgId;
+
  public Item() { //랜덤아이디(중복방지)
         this.ownImgId = UUID.randomUUID().toString();
     }
 
     public Item(ItemDto itemDto) {
-     this();
+        this();
         this.itemId=itemDto.getItemId();
         this.itemName=itemDto.getItemName();
         this.itemPrice=itemDto.getItemPrice();
@@ -37,6 +38,7 @@ public class Item {
 
 
     }
+
 /*  public Item(Item item) {
         this.itemId=item.getItemId();
         this.itemName=item.getItemName();

@@ -4,6 +4,7 @@ import com.example.kiosk.item.dto.ItemFindAllDto;
 
 import com.example.kiosk.item.entity.Item;
 import com.example.kiosk.item.repository.ItemRepository;
+import com.example.kiosk.menu.entity.MenuName;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,10 @@ import java.util.List;
 public class ItemService {
     private final ItemRepository itemRepository;
 
+    public List<Integer> onlyId(MenuName menuId){
+        log.info("ITEM_onlyId_SERVICE");
+        return itemRepository.onlyId(menuId);
+    }
     public ItemFindAllDto menuTeaServ(int itemId) { //해당하는 상세상품만 뿌리기
         log.info("=============milkTea_Service");
         return new ItemFindAllDto(

@@ -5,6 +5,7 @@ import com.example.kiosk.item.dto.ItemFindAllDto;
 
 import com.example.kiosk.item.entity.Item;
 import com.example.kiosk.item.service.ItemService;
+import com.example.kiosk.menu.entity.MenuName;
 import com.example.kiosk.util.FileUploadUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -83,15 +84,26 @@ public class ItemController {
                 .headers(headers)
                 .body(rawImageData);
     }
-
+    @GetMapping("/onlymenuId")
+    public ResponseEntity<?> onlymenuId(MenuName menuId){
+        log.info("ITEM_ONLYMENUID_CONTROLLER");
+        return ResponseEntity.ok().body(itemService.onlyId(menuId));
+    }
     @PostMapping("/register") //상세상품 등록
     public ResponseEntity<?> register(@RequestPart(value="itemImg",required = false)MultipartFile itemImg,
-                                      @RequestPart("itemInfo")ItemDto itemDto) throws  IOException{
+                                      @RequestPart("itemInfo")ItemDto itemDto
+                              /*  @PathVariable int menuName*/
+                                /*    @RequestPart("menuId") MenuName menuName*/
+                                      ) throws  IOException{
         try {
             log.info("ITEM_ADD_CONTROLLER");
             Item item1=new Item(itemDto); //랜덤 ownImgId 받아오기
             log.info("ITEM_ADD_CONTROLLER_item=======>{}",item1);
-            if(itemImg!=null){
+
+
+            // log.info(String.valueOf(menuName));
+           // log.info(String.valueOf(menuname));   && item1.getItemId()== menuname.getMenuId()
+            if(itemImg!=null  ){
                 log.info("itemImg : {}", itemImg.getOriginalFilename());
                 String originalFilename = itemImg.getOriginalFilename();
 

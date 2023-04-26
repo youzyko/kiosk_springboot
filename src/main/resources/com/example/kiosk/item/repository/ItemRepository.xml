@@ -47,4 +47,10 @@ order by
         WHERE ownImgId=#{ownImgId}
     </delete>
 
+    <select id="onlyId" resultType="com.example.kiosk.menu.entity.MenuName">
+        SELECT menuId
+        FROM menuname
+
+    </select>
+
 </mapper>

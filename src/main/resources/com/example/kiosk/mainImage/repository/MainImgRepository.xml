@@ -22,5 +22,11 @@
         FROM imagedata
     </select>
 
+    <delete id="delete">
+        DELETE FROM imagedata
+        WHERE id=#{id}
+    </delete>
+
+
 </mapper>
 <!--       com.example.kiosk.mainImage.entity.MainImg-->

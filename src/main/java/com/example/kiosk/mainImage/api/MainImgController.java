@@ -1,5 +1,6 @@
 package com.example.kiosk.mainImage.api;
 
+import com.example.kiosk.mainImage.dto.ImgAll;
 import com.example.kiosk.mainImage.entity.MainImg;
 import com.example.kiosk.mainImage.service.MainImgService;
 import com.example.kiosk.util.FileUploadUtil;
@@ -109,6 +110,19 @@ public class MainImgController {
         log.info("아이디 전체 불러오기");
         return  ResponseEntity.ok().body(mainImgService.findAllId());
     }
+
+    @DeleteMapping ("/{id}")
+    public ResponseEntity<?> delete(@PathVariable String id){
+        log.info("MAINIMG_DELETE_CONTROLLER");
+        try {
+            boolean f=mainImgService.deleteServ(id);
+            return ResponseEntity.ok().body(f);
+
+        }catch (RuntimeException e){
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 
 }//calss_end
 

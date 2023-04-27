@@ -12,10 +12,10 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ImgAll {
-    private  int count; //갯수
+   private  int count; //갯수
     private List<MainImg> mainImgs;
     public ImgAll(List<MainImg> mainImgs) {
-        this.count = mainImgs.size();
+      //  this.count = mainImgs.size();
         this.convertDtoList(mainImgs);
     }
 

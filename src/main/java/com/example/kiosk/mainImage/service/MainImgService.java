@@ -36,11 +36,21 @@ public class MainImgService {
         return mainImgRepository.findAllId();
     }
 
-
-
 /*    public ImgAll findAllServ() {
         return new ImgAll(mainImgRepository.findALll());
     }*/
+
+    public boolean deleteServ(String id){
+        log.info("ITEM_DELETE_SERVICE");
+        boolean f= mainImgRepository.delete(id);
+        if (!f){ //f=flase
+            log.warn("DELETE_FAIL==>{}",id);
+            throw  new RuntimeException("MAINIMG_DELETE_FAILED");
+
+        }
+        return  f;
+    } //delete_end
+
 
 }//class_end
 

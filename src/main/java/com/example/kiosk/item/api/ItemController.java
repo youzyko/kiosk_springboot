@@ -100,7 +100,6 @@ public class ItemController {
             Item item1=new Item(itemDto); //랜덤 ownImgId 받아오기
             log.info("ITEM_ADD_CONTROLLER_item=======>{}",item1);
 
-
             // log.info(String.valueOf(menuName));
            // log.info(String.valueOf(menuname));   && item1.getItemId()== menuname.getMenuId()
             if(itemImg!=null  ){

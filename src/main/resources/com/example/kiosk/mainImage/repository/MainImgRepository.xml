@@ -28,5 +28,9 @@
     </delete>
 
 
+    <select id="allInform" resultType="com.example.kiosk.mainImage.entity.MainImg">
+        SELECT *
+        FROM imagedata
+    </select>
 </mapper>
 <!--       com.example.kiosk.mainImage.entity.MainImg-->

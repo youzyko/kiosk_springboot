@@ -31,7 +31,7 @@ public class MainImgController {
 
     @PostMapping("/upload")
     public ResponseEntity<?> upload( //베경이미지 등록
-                                     @RequestPart(value = "mainImg", required = false) MultipartFile mainImg
+                                     @RequestPart(value = "mainImg", required = true) MultipartFile mainImg
     ) throws IOException {
         MainImg mainImg1 = new MainImg();
         log.info("mainIMG1================================{}", mainImg1);
@@ -67,6 +67,10 @@ public class MainImgController {
                     = newUploadPath.substring(uploadRootPath.length());
             mainImg1.setMainImg(savePath + File.separator + uploadFileName);
         }//if 절
+        else if (mainImg==null) {
+            log.info("메인이미지 업로드 실패");
+
+        }
         boolean f = mainImgService.upload(mainImg1);
         return ResponseEntity.ok().body(f);
     }
@@ -111,6 +115,11 @@ public class MainImgController {
         return  ResponseEntity.ok().body(mainImgService.findAllId());
     }
 
+    @GetMapping("/bringall")
+    public ResponseEntity<?> allinform(){
+        log.info("모든정보 불러오기");
+        return ResponseEntity.ok().body(mainImgService.allInform());
+    }
     @DeleteMapping ("/{id}")
     public ResponseEntity<?> delete(@PathVariable String id){
         log.info("MAINIMG_DELETE_CONTROLLER");

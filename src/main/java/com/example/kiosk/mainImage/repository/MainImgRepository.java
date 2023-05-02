@@ -14,5 +14,7 @@ public interface MainImgRepository {
   /* String findBackImg();*/
     List<String> findAllId(); //아이디 목록
     boolean delete(String id); //삭제
-
+List<MainImg> allInform();
 }
+
+

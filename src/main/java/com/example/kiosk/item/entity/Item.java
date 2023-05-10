@@ -35,8 +35,6 @@ public class Item {
        // this.countNum=itemDto.getCountNum();
         this.status=itemDto.isStatus();
         this.itemImg=itemDto.getItemImg();
-
-
     }
 
 /*  public Item(Item item) {

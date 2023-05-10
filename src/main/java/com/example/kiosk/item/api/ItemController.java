@@ -152,4 +152,13 @@ public class ItemController {
     }
 
 
+    //상세페이지
+    @GetMapping("/{itemName}")
+    public ResponseEntity<?> onlymenuName(@PathVariable String itemName){
+        log.info("ITEM_BRINGALL_ITEMNAME_CONTROLLER");
+        return  ResponseEntity.ok().body(itemService.detail(itemName));
+    }
+
+
+
 }//class end

@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.kiosk.option.repository.OptionRepository">
-    <select id="coffeeOption" resultType="com.example.kiosk.option.entity.Option">
+<!--    <select id="coffeeOption" resultType="com.example.kiosk.option.entity.Option">
         SELECT
             menuName,menuId,hereTogo,hotCold, iceAmount
         FROM
@@ -16,6 +16,14 @@
         FROM
             option
         WHERE menuId=#{menuId}
+
+    </select>-->
+    <select id="commonOption" resultType="com.example.kiosk.option.entity.Option">
+        SELECT
+            countNum ,hereTogo,hotCold, iceAmount
+        FROM
+            option
+
 
     </select>
 

@@ -57,7 +57,14 @@ public class ItemService {
         if(!f){
             log.warn("DELETE_FAIL==>{}",ownImgId);
             throw  new RuntimeException("delete fail!");
-        }
+   }
         return  f;
     }
+
+   public Item detail(String itemName){
+        log.info("ITEM_ITEMNAME_SERVICE");
+        return  itemRepository.detail(itemName);
+    }
+
+
 }//class_end

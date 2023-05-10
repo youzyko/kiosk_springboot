@@ -17,4 +17,6 @@ public interface ItemRepository {
  List<Item> findAllItem(); //모든 상품목록
     String findImg(String ownImgId); //ownImgId에 해당하는 이미지
     boolean delete(String ownImgId); //삭제
+
+    Item detail(String itemName);
 }

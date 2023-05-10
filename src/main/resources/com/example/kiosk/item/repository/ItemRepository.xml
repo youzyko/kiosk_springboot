@@ -53,4 +53,13 @@ order by
 
     </select>
 
+
+    <select id="detail" resultType="com.example.kiosk.item.entity.Item">
+        SELECT
+          *
+        FROM
+            item
+       where itemName=#{itemName}
+    </select>
+
 </mapper>

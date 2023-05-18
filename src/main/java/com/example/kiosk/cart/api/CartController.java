@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
@@ -24,11 +25,14 @@ public class CartController {
     private  final CartService cartService;
     @Value("${upload.path}")
     private String uploadRootPath;
-    @PostMapping("/incart") //장바구니에 담기
+    @PostMapping("/incart") //장바구니에 담기 //같은이름 오류처리
     public ResponseEntity<?> addcart(@RequestBody Cart cart ){ //JSON으로 보낼때
         //IMG있는 경우->  @RequestPart(value = "mainImg", required = true)
         log.info("ADDCART_CONTROLLER");
         log.info("{}",cart);
+        /*if(cartService.existsByName(cart.getItemName())){ //같은 메뉴가 있을 경우
+            return  ResponseEntity.badRequest().body(cart);
+        }*/
         boolean f=cartService.add(cart);
         return  ResponseEntity.ok().body(f);
     }
@@ -69,5 +73,29 @@ public class CartController {
                 .body(rawImageData);
     }
 
+    @DeleteMapping(value = {"/{itemName}"})
+    public ResponseEntity<?> delete(@PathVariable String itemName){
+        log.info("DELETE_ITEMNAME_CONTROLLER");
+        try {
+            boolean f=cartService.delete(itemName);
+            return  ResponseEntity.ok().body(f);
+        }catch (RuntimeException e){
+            return  ResponseEntity.notFound().build();
 
-}
+        }
+    }
+
+    @DeleteMapping("/deleteall")
+    public  ResponseEntity<?> delteAll(Cart cart){
+        log.info("DELETE_ALL_CONTROLLER");
+        try{
+            boolean f=cartService.deleteall(cart);
+            return  ResponseEntity.ok().body(f);
+        }catch (RuntimeException e){
+            return  ResponseEntity.notFound().build();
+
+        }
+    }
+
+
+}//class_end

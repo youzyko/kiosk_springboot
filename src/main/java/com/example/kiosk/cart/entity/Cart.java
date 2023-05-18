@@ -20,6 +20,10 @@ public class Cart {
     private  String ownImgId; //이미지 id
     private  String itemImg; //이미지
 
+    private  String sweetness; //당도
+
+    private  int random; //랜덤수
+    private int count; //개수
 
    // private  int totalPrice; // 총합계*/
   //  private  String option;
@@ -35,6 +39,9 @@ public class Cart {
         this.itemPrice=cart.getItemPrice();
       this.itemImg=cart.getItemImg();
       //  this.totalPrice=cart.getTotalPrice();
+      this.sweetness= cart.getSweetness();
+      this.random=cart.getRandom();
+      this.count=cart.getCount();
 
     }
 

@@ -5,9 +5,9 @@
 <mapper namespace="com.example.kiosk.cart.repository.CartRepository">
     <insert id="add">
         INSERT INTO  cart
-            (here,hot,ice,itemName,itemPrice,ownImgId,itemImg)
+            (here,hot,ice,itemName,itemPrice,ownImgId,itemImg,sweetness)
         VALUES
-            (#{here},#{hot},#{ice},#{itemName},#{itemPrice},#{ownImgId},#{itemImg})
+            (#{here},#{hot},#{ice},#{itemName},#{itemPrice},#{ownImgId},#{itemImg}, #{sweetness})
     </insert>
 
     <select id="showAll" resultType="com.example.kiosk.cart.entity.Cart">
@@ -25,5 +25,19 @@
 
     </select>
 
+    <delete id="delete">
+        DELETE FROM cart
+        WHERE itemName=#{itemName}
+    </delete>
+
+    <delete id="deleteall">
+        DELETE FROM cart
+    </delete>
+
+    <select id="existsByItemName" resultType="boolean" parameterType="string">
+        SELECT COUNT(*) > 0
+        FROM cart
+        WHERE itemName = #{itemName}
+    </select>
 
 </mapper>

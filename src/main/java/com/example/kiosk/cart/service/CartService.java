@@ -31,5 +31,18 @@ public class CartService {
         return  itemImg;
     }
 
+    public boolean delete(String itemName){
+        log.info("CART_DELETE_SERVICE");
+        return cartRepository.delete(itemName);
+    }
+
+ /*   public boolean existsByName(String itemName){
+        log.info("CART_EXISTBYNAME_SERVICE");
+        return cartRepository.existsByItemName(itemName);
+    }*/
+    public boolean deleteall(Cart cart){
+        log.info("DELETE_ALL_SERVICE");
+        return  cartRepository.deleteall(cart);
+    }
 
 }//class_end

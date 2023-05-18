@@ -12,4 +12,7 @@ public interface CartRepository {
     boolean add(Cart cart);
     List<Cart> showAll();
     String findImg(String ownImgId);
+    boolean delete(String itemName);
+    /*boolean existsByItemName(String itemName);*/
+    boolean deleteall(Cart cart); //전체삭제
 }

@@ -14,7 +14,7 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 public class CoffeeToppingDtoAll {
-    private List<CoffeeToppingDto> coffeeToppingDtos;
+/*    private List<CoffeeToppingDto> coffeeToppingDtos;
     public CoffeeToppingDtoAll(List<Toppping> topppingList){
         this.convertDtoList(topppingList);
     }
@@ -24,6 +24,6 @@ public class CoffeeToppingDtoAll {
             dtos.add(new CoffeeToppingDto(toppping));
         }
         this.coffeeToppingDtos=dtos;
-    }
+    }*/
 
 }

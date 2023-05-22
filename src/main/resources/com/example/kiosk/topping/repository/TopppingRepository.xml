@@ -3,24 +3,20 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.kiosk.topping.repository.TopppingRepository">
-    <select id="coffeeToppingOption" resultType="com.example.kiosk.topping.entity.Toppping">
+    <select id="toppingAll" resultType="com.example.kiosk.topping.entity.Toppping">
         SELECT
-            toppingNameCoffee,toppingPriceCoffee
+            menuId,random,toppingName,toppingPrice,toppingImg
         FROM
-            coffeetopping
-        WHERE menuId=#{menuId}
-    </select>
-
-    <select id="nonCoffeeToppingOption" resultType="com.example.kiosk.topping.entity.Toppping">
-        SELECT
-            toppingNameNonCoffee,toppingPriceNonCoffee
-        FROM
-            noncoffeetopping
+            topping
 
     </select>
 
-
-
+    <insert id="save">
+        INSERT INTO topping
+           (menuId,random,toppingName,toppingPrice,toppingImg,ownImgId)
+        VALUES
+            (#{menuId},#{random},#{toppingName},#{toppingPrice},#{toppingImg},#{ownImgId})
+    </insert>
 
 
 </mapper>

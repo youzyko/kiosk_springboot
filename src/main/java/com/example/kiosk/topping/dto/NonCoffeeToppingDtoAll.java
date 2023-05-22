@@ -9,12 +9,12 @@ import lombok.ToString;
 import java.util.ArrayList;
 import java.util.List;
 
-@Setter
+/*@Setter
 @Getter
 @ToString
-@NoArgsConstructor
+@NoArgsConstructor*/
 public class NonCoffeeToppingDtoAll {
-    private List<NonCoffeeToppingDto> nonCoffeeToppingDtos;
+  /*  private List<NonCoffeeToppingDto> nonCoffeeToppingDtos;
     public  NonCoffeeToppingDtoAll(List<Toppping> topppingList){
         this.convertDtoList(topppingList);
     }
@@ -24,5 +24,5 @@ public class NonCoffeeToppingDtoAll {
             dtos.add(new NonCoffeeToppingDto(toppping));
         }
         this.nonCoffeeToppingDtos=dtos;
-    }
+    }*/
 }

@@ -3,8 +3,7 @@ package com.example.kiosk.topping.service;
 
 
 import com.example.kiosk.item.entity.Item;
-import com.example.kiosk.topping.dto.CoffeeToppingDtoAll;
-import com.example.kiosk.topping.dto.NonCoffeeToppingDtoAll;
+
 import com.example.kiosk.topping.entity.Toppping;
 import com.example.kiosk.topping.repository.TopppingRepository;
 import lombok.RequiredArgsConstructor;
@@ -30,16 +29,22 @@ public class TopppingService {
     }
 
 
- /*   public CoffeeToppingDtoAll coffeeToppingServ(int menuId){
-        log.info("===========coffeeToppingServ");
-        return new CoffeeToppingDtoAll(topppingRepository.coffeeToppingOption(menuId));
+    public String getProfilePath(String ownImgId){
+        String toppingImg=topppingRepository.findImg(ownImgId);
+        log.info("find profile path - {}", toppingImg);
+        return  toppingImg;
     }
 
-    public NonCoffeeToppingDtoAll noncoffeeToppingServ(int menuId){
-        log.info("===========noncoffeeToppingServ");
-        return new NonCoffeeToppingDtoAll((List<Toppping>)topppingRepository.nonCoffeeToppingOption(menuId));
-    }*/
+    public List<String> findAllId() { //ownImgId만 가져오기
+        log.info("TOPPING_ALLID_SERVICE");
+        return topppingRepository.findAllId();
+    }
 
+    //삭제
+    public boolean delete(String ownImgId){
+        log.info("TOPPING_DELETE_SERVICE");
+        return topppingRepository.delete(ownImgId);
+    }
 
 
 }//class_end

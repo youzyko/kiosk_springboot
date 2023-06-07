@@ -4,7 +4,8 @@ package com.example.kiosk.topping.api;
 
 import com.example.kiosk.item.dto.ItemDto;
 import com.example.kiosk.item.entity.Item;
-import com.example.kiosk.topping.dto.NonCoffeeToppingDto;
+
+import com.example.kiosk.menu.entity.MenuName;
 import com.example.kiosk.topping.entity.Toppping;
 import com.example.kiosk.topping.service.TopppingService;
 import com.example.kiosk.util.FileUploadUtil;
@@ -12,12 +13,15 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -32,13 +36,13 @@ public class ToppingController {
     private String uploadRootPath;
 
 
-    @GetMapping //저장된 토핑 다 불러오기
+    @GetMapping //전체정보_토핑
     public ResponseEntity<?> toppingAll(){
         log.info("GET_TOPPING_CONTROLLER");
         return ResponseEntity.ok().body(topppingService.toppingAll());
     }
 
-    @PostMapping("/register") //토핑 등록
+    @PostMapping("/register") //토핑 등록+이미지까지
     public ResponseEntity<?> register(@RequestPart(value="toppingImg",required = true) MultipartFile toppingImg,
                                       @RequestPart("toppingInfo") Toppping toppping
             /*  @PathVariable int menuName*/
@@ -87,42 +91,54 @@ public class ToppingController {
         }
 
     } //postMapping_/register
+    @GetMapping("/bringownImgId")//ownImgId만 String[]로 나열...안씀
+    public ResponseEntity<?> listAllId(){
+        log.info("TOPPING_ALLID_CONTROLLER");
+        return ResponseEntity.ok().body(topppingService.findAllId());
+    }
 
-    @GetMapping ()//ownImgid에 따라 이미지 가져오기
+    @GetMapping(value = {"/{ownImgId}"}) //해당되는 ownImgId 그림 빼오기
+    public ResponseEntity<?> ImgAll(@PathVariable String ownImgId) throws IOException{
 
+        String itemPath = topppingService.getProfilePath(ownImgId);
+        log.info("TOPPING_IMG_CONTROLLER{}",itemPath);
+        String fullPath = uploadRootPath + File.separator + itemPath;
+        log.info("fullPath=={}",fullPath);
 
+        // 해당 경로를 파일 객체로 포장
+        File targetFile = new File(fullPath);
+        log.info("targetFile=={}",targetFile);
 
+        //해당 파일 존재x
+        if(!targetFile.exists()) return  ResponseEntity.notFound().build();
 
+        // 파일 데이터를 바이트배열로 포장 (blob 데이터)...대상 파일을 복사하여 Byte 배열로 반환해주는 클래스
+        byte[] rawImageData = FileCopyUtils.copyToByteArray(targetFile);
+       // log.info("rawImageData=={}",rawImageData);
+        // 응답 헤더 정보 추가
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(FileUploadUtil.getMediaType(itemPath));
 
+        // 클라이언트에 순수 이미지파일 데이터 리턴
+        return ResponseEntity
+                .ok()
+                .headers(headers)
+                .body(rawImageData);
+    } //ownimgid
 
- /*   @GetMapping (value = {"/{menuId}"}) //논커피류
-    public ResponseEntity<?> TopppingAllNon (@PathVariable int menuId){
-        if(menuId==4){
-            return ResponseEntity.ok().body(topppingService.coffeeToppingServ(menuId));
-        }else{
-            return ResponseEntity.ok().body(topppingService.noncoffeeToppingServ(menuId));
-        }*/
-   /*     if(menuId==0 || menuId==1||menuId==2||menuId==3){
-            log.info("=============ToppingController");
-
+    //삭제
+    @DeleteMapping("/{ownImgId}")
+    public ResponseEntity<?> delete(@PathVariable String ownImgId){
+        log.info("TOPPING_DELETE_CONTROLLER");
+        try{
+            boolean f= topppingService.delete(ownImgId);
+            return  ResponseEntity.ok().body(f);
         }
-        return null;*/
-    // getmapping_end
-
-   /* @GetMapping(value = {"/{menuId}"})//커피류
-    public ResponseEntity<?> TopppingAllCoffee (@PathVariable int menuId){
-        log.info("======커피토핑만 출력합니다");
-        if(menuId==4){
-            return ResponseEntity.ok().body(topppingService.coffeeToppingServ(menuId));
+        catch (Exception e){
+            return ResponseEntity.notFound().build();
         }
-      return null;
-    }*/
+    }
 
-
-/*if(menuId==4){
-            log.info("======커피토핑만 출력합니다");
-            return ResponseEntity.ok().body(topppingService.coffeeToppingServ(menuId));
-        }else {*/
 
 
 

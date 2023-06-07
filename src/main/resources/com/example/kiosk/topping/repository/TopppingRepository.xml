@@ -3,12 +3,19 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.kiosk.topping.repository.TopppingRepository">
+    <!--토핑 전체 정보-->
     <select id="toppingAll" resultType="com.example.kiosk.topping.entity.Toppping">
         SELECT
-            menuId,random,toppingName,toppingPrice,toppingImg
+           *
         FROM
             topping
 
+    </select>
+
+    <select id="findImg" resultType="String">
+        SELECT toppingImg
+        FROM topping
+        where ownImgId=#{ownImgId}
     </select>
 
     <insert id="save">
@@ -17,6 +24,19 @@
         VALUES
             (#{menuId},#{random},#{toppingName},#{toppingPrice},#{toppingImg},#{ownImgId})
     </insert>
+
+    <select id="findAllId" resultType="String">
+        SELECT
+            ownImgId
+        FROM
+            topping
+
+    </select>
+
+    <delete id="delete">
+        DELETE FROM topping
+        WHERE ownImgId=#{ownImgId}
+    </delete>
 
 
 </mapper>

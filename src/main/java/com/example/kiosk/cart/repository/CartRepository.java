@@ -1,6 +1,5 @@
 package com.example.kiosk.cart.repository;
 
-import com.example.kiosk.cart.dto.CartList;
 import com.example.kiosk.cart.entity.Cart;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -15,4 +14,6 @@ public interface CartRepository {
     boolean delete(String itemName);
     /*boolean existsByItemName(String itemName);*/
     boolean deleteall(Cart cart); //전체삭제
+
+
 }

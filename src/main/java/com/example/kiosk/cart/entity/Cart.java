@@ -1,7 +1,12 @@
 package com.example.kiosk.cart.entity;
 
-import com.example.kiosk.item.entity.Item;
+import com.example.kiosk.cart.dto.Toppingcart;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.*;
+
+import java.util.List;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -23,26 +28,58 @@ public class Cart {
     private  String sweetness; //당도
 
     private  int random; //랜덤수
-    private int count; //개수
+    private List<Map<Toppingcart, Object>>  selectedToppingsJson;
 
-   // private  int totalPrice; // 총합계*/
-  //  private  String option;
+    //MAP-JSON간 변환
+    private String selectedToppings ;
+
+    public String getSelectedToppingsJson() {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            //객체를 JSON타입의 String으로 변환
+            return mapper.writeValueAsString(selectedToppings);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+ /*   public void setSelectedToppingsJson(String selectedToppingsJson) {
+        this.selectedToppingsJson = selectedToppingsJson;
+    }
+    public void serializeSelectedToppings() {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            selectedToppingsJson = mapper.writeValueAsString(selectedToppings);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+    }*/
+
+
+    /* private String selectedToppings;*/
+
+  /*  private List<Map<String, Object>> selectedToppings;*/
+
+   // private String toppingName; //토핑 이름
+
+  //  private int toppingPrice; //토핑 가격
+
 
   public  Cart (Cart cart){
-       // this.option=cart.getOption();
-       // this.item=cart.getItem();
-      //  this.amount=cart.getAmount();
+
         this.here=cart.getHere();
         this.hot=cart.getHot();
         this.ice=cart.getIce();
         this.itemName= cart.getItemName();
         this.itemPrice=cart.getItemPrice();
       this.itemImg=cart.getItemImg();
-      //  this.totalPrice=cart.getTotalPrice();
       this.sweetness= cart.getSweetness();
       this.random=cart.getRandom();
-      this.count=cart.getCount();
-
+      this.selectedToppings=cart.getSelectedToppings();
+/*     this.toppingName=cart.getToppingName();
+     this.toppingPrice= cart.getToppingPrice();*/
     }
+
+
 
 }

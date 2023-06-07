@@ -3,6 +3,8 @@ package com.example.kiosk.cart.api;
 import com.example.kiosk.cart.entity.Cart;
 import com.example.kiosk.cart.service.CartService;
 import com.example.kiosk.util.FileUploadUtil;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @Slf4j
@@ -25,6 +28,7 @@ public class CartController {
     private  final CartService cartService;
     @Value("${upload.path}")
     private String uploadRootPath;
+
     @PostMapping("/incart") //장바구니에 담기 //같은이름 오류처리
     public ResponseEntity<?> addcart(@RequestBody Cart cart ){ //JSON으로 보낼때
         //IMG있는 경우->  @RequestPart(value = "mainImg", required = true)
@@ -61,7 +65,7 @@ public class CartController {
 
         // 파일 데이터를 바이트배열로 포장 (blob 데이터)...대상 파일을 복사하여 Byte 배열로 반환해주는 클래스
         byte[] rawImageData = FileCopyUtils.copyToByteArray(targetFile);
-        log.info("rawImageData=={}",rawImageData);
+      //  log.info("rawImageData=={}",rawImageData);
         // 응답 헤더 정보 추가
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(FileUploadUtil.getMediaType(itemPath));

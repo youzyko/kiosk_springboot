@@ -11,7 +11,7 @@ import java.util.UUID;
 //@NoArgsConstructor
 @Builder
 public class Toppping {
-    private int menuId; //menuId=3(커피)이면 다른 토핑 보여주기
+    private String menuId; //menuId=3(커피)이면 다른 토핑 보여주기
     private int random; //허수
     private String toppingName; //토핑이름
     private  int toppingPrice; //토핑 가격

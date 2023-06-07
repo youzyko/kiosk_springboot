@@ -73,7 +73,7 @@ public class ItemController {
 
         // 파일 데이터를 바이트배열로 포장 (blob 데이터)...대상 파일을 복사하여 Byte 배열로 반환해주는 클래스
         byte[] rawImageData = FileCopyUtils.copyToByteArray(targetFile);
-        log.info("rawImageData=={}",rawImageData);
+       // log.info("rawImageData=={}",rawImageData);
         // 응답 헤더 정보 추가
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(FileUploadUtil.getMediaType(itemPath));

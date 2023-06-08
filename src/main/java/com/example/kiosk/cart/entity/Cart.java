@@ -4,7 +4,7 @@ import com.example.kiosk.cart.dto.Toppingcart;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.*;
-
+import com.fasterxml.jackson.core.type.TypeReference;
 import java.util.List;
 import java.util.Map;
 
@@ -28,10 +28,10 @@ public class Cart {
     private  String sweetness; //당도
 
     private  int random; //랜덤수
-    private List<Map<String, Object>>  selectedToppingsJson;
+    private List<Map<String, Object>>  selectedToppings;
 
     //MAP-JSON간 변환
-   private String selectedToppings ;
+    private String selectedToppingsJson ;
 
     public String getSelectedToppingsJson() {
         try {
@@ -42,6 +42,17 @@ public class Cart {
             return null;
         }
     }
+
+    public void setSelectedToppingsJson(String selectedToppingsJson) {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            this.selectedToppings = mapper.readValue(selectedToppingsJson, new TypeReference<List<Map<String, Object>>>() {});
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+    }
+
+
  /*   public void setSelectedToppingsJson(String selectedToppingsJson) {
         this.selectedToppingsJson = selectedToppingsJson;
     }
@@ -57,24 +68,24 @@ public class Cart {
 
     /* private String selectedToppings;*/
 
-  /*  private List<Map<String, Object>> selectedToppings;*/
+    /*  private List<Map<String, Object>> selectedToppings;*/
 
-   // private String toppingName; //토핑 이름
+    // private String toppingName; //토핑 이름
 
-  //  private int toppingPrice; //토핑 가격
+    //  private int toppingPrice; //토핑 가격
 
 
-  public  Cart (Cart cart){
+    public  Cart (Cart cart){
 
         this.here=cart.getHere();
         this.hot=cart.getHot();
         this.ice=cart.getIce();
         this.itemName= cart.getItemName();
         this.itemPrice=cart.getItemPrice();
-      this.itemImg=cart.getItemImg();
-      this.sweetness= cart.getSweetness();
-      this.random=cart.getRandom();
-      this.selectedToppings=cart.getSelectedToppings();
+        this.itemImg=cart.getItemImg();
+        this.sweetness= cart.getSweetness();
+        this.random=cart.getRandom();
+        this.selectedToppings=cart.getSelectedToppings();
 /*     this.toppingName=cart.getToppingName();
      this.toppingPrice= cart.getToppingPrice();*/
     }

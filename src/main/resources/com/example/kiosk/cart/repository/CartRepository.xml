@@ -12,9 +12,9 @@
     </insert>-->
     <insert id="add" >
         INSERT INTO cart
-        (here, hot, ice, itemName, itemPrice, ownImgId, itemImg,sweetness,selectedToppings)
+        (here, hot, ice, itemName, itemPrice, ownImgId, itemImg,sweetness,selectedToppingsJson)
         VALUES
-        (#{here}, #{hot}, #{ice}, #{itemName}, #{itemPrice}, #{ownImgId}, #{itemImg}, #{sweetness}, #{selectedToppings});
+        (#{here}, #{hot}, #{ice}, #{itemName}, #{itemPrice}, #{ownImgId}, #{itemImg}, #{sweetness}, #{selectedToppingsJson});
 
      <!--  <foreach collection="selectedToppings" item="topping" separator=",">
             INSERT INTO topping  (toppingName, toppingPrice)

@@ -33,8 +33,7 @@
     <select id="findImg" resultType="String">
         SELECT itemImg
         FROM cart
-        where ownImgId=#{ownImgId}
-
+        where random=#{random}
     </select>
 
     <delete id="delete">

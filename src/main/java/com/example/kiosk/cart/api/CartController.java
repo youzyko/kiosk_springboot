@@ -3,22 +3,19 @@ package com.example.kiosk.cart.api;
 import com.example.kiosk.cart.entity.Cart;
 import com.example.kiosk.cart.service.CartService;
 import com.example.kiosk.util.FileUploadUtil;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @Slf4j
@@ -49,10 +46,10 @@ public class CartController {
 
     }
 
-    @GetMapping(value = {"/{ownImgId}"}) //해당되는 ownImgId 그림 빼오기
-    public ResponseEntity<?> ImgAll(@PathVariable String ownImgId) throws IOException {
+    @GetMapping(value = {"/{random}"}) //해당되는 ownImgId 그림 빼오기
+    public ResponseEntity<?> ImgAll(@PathVariable int random) throws IOException {
         log.info("GETIMG_CONTROLLER");
-        String itemPath = cartService.getProfilePath(ownImgId);
+        String itemPath = cartService.getProfilePath(random);
         log.info("itemIMG=={}",itemPath);
         String fullPath = uploadRootPath + File.separator + itemPath;
         log.info("fullPath=={}",fullPath);
@@ -77,6 +74,41 @@ public class CartController {
                 .headers(headers)
                 .body(rawImageData);
     }
+
+/*    @GetMapping(value = {"/{ownImgId}"})
+  public ResponseEntity<List<byte[]>> ImgAll(@PathVariable String ownImgId) throws IOException {
+      log.info("GETIMG_CONTROLLER");
+      List<String> itemPaths = Collections.singletonList(cartService.getProfilePath(ownImgId));
+      log.info("itemIMGs=={}", itemPaths);
+
+      List<byte[]> rawImageDatas = new ArrayList<>();
+
+      for (String itemPath : itemPaths) {
+          String fullPath = uploadRootPath + File.separator + itemPath;
+          log.info("fullPath=={}", fullPath);
+
+          // 해당 경로를 파일 객체로 포장
+          File targetFile = new File(fullPath);
+          log.info("targetFile=={}", targetFile);
+
+          // 파일 데이터를 바이트 배열로 포장 (blob 데이터)...대상 파일을 복사하여 Byte 배열로 반환해주는 클래스
+          byte[] rawImageData = FileCopyUtils.copyToByteArray(targetFile);
+          rawImageDatas.add(rawImageData);
+
+          // 응답 헤더 정보 추가
+          HttpHeaders headers = new HttpHeaders();
+          headers.setContentType(FileUploadUtil.getMediaType(itemPath));
+
+          // 클라이언트에 순수 이미지 파일 데이터 리턴
+          return ResponseEntity
+                  .ok()
+                  .headers(headers)
+                  .body(rawImageDatas);
+      }
+
+      // If no image files were found, return a not found response
+      return ResponseEntity.notFound().build();
+  }*/
 
     @DeleteMapping(value = {"/{itemName}"})
     public ResponseEntity<?> delete(@PathVariable String itemName){

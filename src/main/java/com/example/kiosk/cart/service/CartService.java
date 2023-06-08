@@ -30,11 +30,11 @@ public class CartService {
         log.info("SHOWALL_SERVICE");
         return cartRepository.showAll();
     }
-    public String getProfilePath(String ownImgId){
+    public String getProfilePath(int random){
         log.info("GETIMG_SERVICE");
-        String itemImg=cartRepository.findImg(ownImgId);
+        String itemImg= cartRepository.findImg(random);
         log.info("find profile path - {}", itemImg);
-        return  itemImg;
+        return itemImg;
     }
 
     public boolean delete(String itemName){

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @Slf4j
@@ -30,7 +31,7 @@ public class CartController {
     private String uploadRootPath;
 
     @PostMapping("/incart") //장바구니에 담기 //같은이름 오류처리
-    public ResponseEntity<?> addcart(@RequestBody Cart cart ){ //JSON으로 보낼때
+    public ResponseEntity<?> addcart(@RequestBody Cart cart  ){ //JSON으로 보낼때
         //IMG있는 경우->  @RequestPart(value = "mainImg", required = true)
         log.info("ADDCART_CONTROLLER");
         log.info("{}",cart);

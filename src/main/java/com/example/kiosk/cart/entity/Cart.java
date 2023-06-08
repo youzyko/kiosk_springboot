@@ -28,15 +28,14 @@ public class Cart {
     private  String sweetness; //당도
 
     private  int random; //랜덤수
-    private List<Map<Toppingcart, Object>>  selectedToppingsJson;
+    private List<Map<String, Object>>  selectedToppingsJson;
 
     //MAP-JSON간 변환
-    private String selectedToppings ;
+   private String selectedToppings ;
 
     public String getSelectedToppingsJson() {
-        ObjectMapper mapper = new ObjectMapper();
         try {
-            //객체를 JSON타입의 String으로 변환
+            ObjectMapper mapper = new ObjectMapper();
             return mapper.writeValueAsString(selectedToppings);
         } catch (JsonProcessingException e) {
             e.printStackTrace();

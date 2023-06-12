@@ -37,9 +37,9 @@ public class CartService {
         return itemImg;
     }
 
-    public boolean delete(String itemName){
+    public boolean delete(int random){
         log.info("CART_DELETE_SERVICE");
-        return cartRepository.delete(itemName);
+        return cartRepository.delete(random);
     }
 
  /*   public boolean existsByName(String itemName){

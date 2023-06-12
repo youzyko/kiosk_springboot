@@ -110,11 +110,11 @@ public class CartController {
       return ResponseEntity.notFound().build();
   }*/
 
-    @DeleteMapping(value = {"/{itemName}"})
-    public ResponseEntity<?> delete(@PathVariable String itemName){
+    @DeleteMapping(value = {"/{random}"})
+    public ResponseEntity<?> delete(@PathVariable int random){
         log.info("DELETE_ITEMNAME_CONTROLLER");
         try {
-            boolean f=cartService.delete(itemName);
+            boolean f=cartService.delete(random);
             return  ResponseEntity.ok().body(f);
         }catch (RuntimeException e){
             return  ResponseEntity.notFound().build();

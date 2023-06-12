@@ -38,7 +38,7 @@
 
     <delete id="delete">
         DELETE FROM cart
-        WHERE itemName=#{itemName}
+        WHERE random=#{random}
     </delete>
 
     <delete id="deleteall">

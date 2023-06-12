@@ -11,7 +11,7 @@ public interface CartRepository {
     boolean add(Cart cart);
     List<Cart> showAll();
     String findImg(int random);
-    boolean delete(String itemName);
+    boolean delete(int random);
     /*boolean existsByItemName(String itemName);*/
     boolean deleteall(Cart cart); //전체삭제
 

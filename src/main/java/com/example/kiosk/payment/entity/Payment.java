@@ -3,8 +3,10 @@ package com.example.kiosk.payment.entity;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import lombok.*;
 
+import java.lang.reflect.Type;
 import java.util.*;
 
 @Getter
@@ -15,8 +17,8 @@ import java.util.*;
 @Builder
 public class Payment {
     private int totalPrice; //총가격
-    private List<String> orderName;
-private  String orderNameJson;
+    private List<String> orderName; //주문한 메뉴이름 list형태
+    private  String orderNameJson; //list=>String 형태
     private String orderTopping; //주문 토핑
     private String orderId; //주문번호
 
@@ -30,29 +32,21 @@ private  String orderNameJson;
         this();
         this.totalPrice = payment.getTotalPrice();
         this.orderName = payment.getOrderName();
+        this.orderNameJson = payment.getOrderNameJson();
         this.orderTopping = payment.getOrderTopping();
     }
 
-
-    public List<String> getOrderNameJson() {
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            return mapper.readValue(orderNameJson, new TypeReference<List<String>>() {});
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public void setOrderNameJson(List<String> orderName) {
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            this.orderNameJson = mapper.writeValueAsString(orderName);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
+    @Override
+    public String toString() {
+        return "Payment{" +
+                "totalPrice=" + totalPrice +
+                ", orderNameJson='" + orderNameJson + '\'' +
+                ", orderTopping='" + orderTopping + '\'' +
+                ", orderId='" + orderId + '\'' +
+                ", date=" + date +
+                '}';
     }
 
 
+}//class_end
 
-}

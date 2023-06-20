@@ -7,7 +7,7 @@
 
     <insert id="approved">
         INSERT INTO payment
-            (totalPrice,orderId,orderTopping,orderName)
+            (totalPrice,orderId,orderTopping,orderNameJson)
         VALUES
             (#{totalPrice},#{orderId},#{orderTopping},#{orderNameJson})
     </insert>

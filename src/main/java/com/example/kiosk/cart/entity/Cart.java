@@ -53,26 +53,6 @@ public class Cart {
     }
 
 
- /*   public void setSelectedToppingsJson(String selectedToppingsJson) {
-        this.selectedToppingsJson = selectedToppingsJson;
-    }
-    public void serializeSelectedToppings() {
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            selectedToppingsJson = mapper.writeValueAsString(selectedToppings);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-    }*/
-
-
-    /* private String selectedToppings;*/
-
-    /*  private List<Map<String, Object>> selectedToppings;*/
-
-    // private String toppingName; //토핑 이름
-
-    //  private int toppingPrice; //토핑 가격
 
 
     public  Cart (Cart cart){

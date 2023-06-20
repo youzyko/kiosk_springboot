@@ -3,23 +3,13 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.kiosk.cart.repository.CartRepository">
-    <!--<insert id="add">
-        INSERT INTO  cart
-            (here,hot,ice,itemName,itemPrice,ownImgId,itemImg,sweetness,selectedToppings)
-        VALUES
-            (#{here},#{hot},#{ice},#{itemName},#{itemPrice},#{ownImgId},#{itemImg}, #{sweetness} #{selectedToppings})
 
-    </insert>-->
     <insert id="add" >
         INSERT INTO cart
         (here, hot, ice, itemName, itemPrice, ownImgId, itemImg,sweetness,selectedToppingsJson)
         VALUES
         (#{here}, #{hot}, #{ice}, #{itemName}, #{itemPrice}, #{ownImgId}, #{itemImg}, #{sweetness}, #{selectedToppingsJson});
 
-     <!--  <foreach collection="selectedToppings" item="topping" separator=",">
-            INSERT INTO topping  (toppingName, toppingPrice)
-            VALUES ( #{topping.toppingName}, #{topping.toppingPrice});
-        </foreach>-->
     </insert>
 
     <select id="showAll" resultType="com.example.kiosk.cart.entity.Cart">

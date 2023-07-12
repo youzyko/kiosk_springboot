@@ -3,8 +3,6 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.kiosk.payment.repository.PaymentRepository">
-
-
     <insert id="approved">
         INSERT INTO payment
             (totalPrice,orderId,orderTopping,orderNameJson)
@@ -12,6 +10,13 @@
             (#{totalPrice},#{orderId},#{orderTopping},#{orderNameJson})
     </insert>
 
+    <select id="showAll" resultType="com.example.kiosk.payment.entity.Payment">
+        SELECT
+            *
+        FROM
+            payment
+
+    </select>
 
 
 </mapper>

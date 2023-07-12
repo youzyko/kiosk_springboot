@@ -122,7 +122,7 @@ public class CartController {
         }
     }
 
-    @DeleteMapping("/deleteall")
+    @DeleteMapping("/deleteall") //전체삭제
     public  ResponseEntity<?> delteAll(Cart cart){
         log.info("DELETE_ALL_CONTROLLER");
         try{

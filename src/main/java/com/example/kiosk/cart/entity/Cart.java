@@ -30,6 +30,9 @@ public class Cart {
     private  int random; //랜덤수
     private List<Map<String, Object>>  selectedToppings;
 
+    private  int count; //개수
+
+
     //MAP-JSON간 변환
     private String selectedToppingsJson ;
 
@@ -68,6 +71,7 @@ public class Cart {
         this.selectedToppings=cart.getSelectedToppings();
 /*     this.toppingName=cart.getToppingName();
      this.toppingPrice= cart.getToppingPrice();*/
+        this.count=cart.getCount();
     }
 
 

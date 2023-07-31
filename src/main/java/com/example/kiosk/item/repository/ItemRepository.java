@@ -10,7 +10,7 @@ import java.util.List;
 
 @Mapper
 public interface ItemRepository {
-    List<Integer> onlyId(MenuName menuId);
+    List<MenuName> onlyId(MenuName menuId);
    List<Item> menuTea(int itemId);
     boolean save(Item item); //  등록
     List<String> findAllId(); //아이디 목록

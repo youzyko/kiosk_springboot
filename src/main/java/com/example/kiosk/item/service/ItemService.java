@@ -17,7 +17,7 @@ import java.util.List;
 public class ItemService {
     private final ItemRepository itemRepository;
 
-    public List<Integer> onlyId(MenuName menuId){
+    public List<MenuName> onlyId(MenuName menuId){
         log.info("ITEM_onlyId_SERVICE");
         return itemRepository.onlyId(menuId);
     }

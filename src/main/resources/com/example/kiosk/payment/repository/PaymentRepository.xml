@@ -5,9 +5,9 @@
 <mapper namespace="com.example.kiosk.payment.repository.PaymentRepository">
     <insert id="approved">
         INSERT INTO payment
-            (totalPrice,orderId,orderTopping,orderNameJson)
+            (totalPrice,orderId,orderTopping,orderNameJson,orderCard)
         VALUES
-            (#{totalPrice},#{orderId},#{orderTopping},#{orderNameJson})
+            (#{totalPrice},#{orderId},#{orderTopping},#{orderNameJson},#{orderCard})
     </insert>
 
     <select id="showAll" resultType="com.example.kiosk.payment.entity.Payment">
@@ -17,6 +17,33 @@
             payment
 
     </select>
+
+    <select id="searchList" resultType="com.example.kiosk.payment.entity.Payment">
+
+      <!--  SELECT totalPrice,orderId,orderTopping,orderNameJson,orderCard FROM payment
+        WHERE date >= DATE(#{startDate}) AND date <= DATE(#{endDate} + INTERVAL 1 DAY)-->
+        <![CDATA[
+         SELECT * FROM payment
+    WHERE date >= #{startDate} AND date < #{endDate}
+    ]]>
+
+    </select>
+
+
+    <select id="ordercardshow" resultType="com.example.kiosk.payment.entity.Payment">
+        SELECT
+            *
+        FROM
+            payment
+where  orderCard =#{orderCard}
+
+    </select>
+
+    <delete id="delete">
+        DELETE FROM payment
+        WHERE orderCard=#{orderCard}
+    </delete>
+
 
 
 </mapper>

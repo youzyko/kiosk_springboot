@@ -50,7 +50,7 @@ order by
 
 
     <select id="onlyId" resultType="com.example.kiosk.menu.entity.MenuName">
-        SELECT menuId
+        SELECT menuId,MenuName
         FROM menuname
 
     </select>

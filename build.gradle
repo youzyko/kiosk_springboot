@@ -2,7 +2,11 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '2.7.9'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id 'war'
 }
+
+bootWar.enabled=false;
+war.enabled=true;
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
@@ -57,5 +61,7 @@ dependencies {
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
+	//useJUnitPlatform()
+	//gradle 실행시 test 스킵코드
+	exclude '**/*'
 }

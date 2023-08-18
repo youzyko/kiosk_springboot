@@ -4,9 +4,7 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 	id 'war'
 }
-jar {
-	enabled = false
-}
+
 bootWar.enabled=false;
 war.enabled=true;
 
@@ -64,5 +62,6 @@ dependencies {
 
 tasks.named('test') {
 	//useJUnitPlatform()
-	exclude "**/*"
+	//exclude "**/*"
+	enabled=false
 }

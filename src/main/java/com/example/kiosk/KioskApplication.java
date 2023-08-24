@@ -2,9 +2,10 @@ package com.example.kiosk;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class KioskApplication {
+public class KioskApplication extends SpringBootServletInitializer {
 
 
 	public static void main(String[] args) {

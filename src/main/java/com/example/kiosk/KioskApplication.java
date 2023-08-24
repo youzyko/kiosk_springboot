@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class KioskApplication extends SpringBootServletInitializer {
+public class KioskApplication {
 
 
 	public static void main(String[] args) {
